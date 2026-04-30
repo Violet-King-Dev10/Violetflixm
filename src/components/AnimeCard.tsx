@@ -1,39 +1,31 @@
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'motion/react';
 import { AnimeSubject } from '../types';
 
 interface AnimeCardProps {
   anime: AnimeSubject;
-  key?: string | number;
 }
 
 export function AnimeCard({ anime }: AnimeCardProps) {
   const navigate = useNavigate();
 
-  // The anime URL usually contains some ID or path we can use
-  // Since the API uses URL as an identifier, we'll base64 it or use it in the path
-  const handleNavigate = () => {
-    const animeId = encodeURIComponent(anime.url);
-    navigate(`/anime/${animeId}`);
-  };
-
   return (
-    <motion.div
-      whileHover={{ scale: 1.05, zIndex: 10 }}
-      className="relative aspect-[2/3] cursor-pointer rounded-lg overflow-hidden snap-start shadow-lg"
-      onClick={handleNavigate}
+    <div 
+      onClick={() => navigate(`/anime/${encodeURIComponent(anime.url)}`)}
+      className="group cursor-pointer"
     >
-      <img
-        src={anime.image}
-        alt={anime.title}
-        className="w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opactiy-60" />
-      
-      <div className="absolute bottom-0 left-0 right-0 p-4">
-        <p className="text-sm font-bold truncate text-white">{anime.title}</p>
-        {anime.year && <p className="text-[10px] text-gray-400">{anime.year} • {anime.type}</p>}
+      <div className="relative aspect-[2/3] rounded-xl overflow-hidden border border-white/10 hover:border-red-600 transition-all duration-300">
+        <img 
+          src={anime.image} 
+          alt={anime.title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+        
+        <div className="absolute bottom-0 left-0 right-0 p-4">
+          <p className="font-bold text-sm line-clamp-2">{anime.title}</p>
+          {anime.year && <p className="text-xs text-gray-400">{anime.year}</p>}
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
-}
+          }
