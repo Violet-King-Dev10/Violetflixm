@@ -6,6 +6,7 @@ import { cn } from '../lib/utils';
 import { Play, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { Logo } from '../components/Logo';
 
 export function Home() {
   const [trending, setTrending] = useState<Subject[]>([]);
@@ -32,6 +33,7 @@ export function Home() {
     fetchData();
   }, []);
 
+  // Auto carousel
   useEffect(() => {
     if (trending.length === 0) return;
     const interval = setInterval(() => {
@@ -46,17 +48,50 @@ export function Home() {
 
   if (loading) {
     return (
-      <div className="h-screen flex items-center justify-center bg-[#141414]">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-red-600"></div>
+      <div className="min-h-screen flex items-center justify-center bg-[#141414]">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-red-600"></div>
       </div>
     );
   }
 
   return (
     <div className="relative min-h-screen bg-[#141414] pb-20">
+      {/* Fixed Top Navigation */}
+      <div className="fixed top-0 left-0 right-0 bg-[#141414]/95 backdrop-blur-md z-50 border-b border-white/10">
+        <div className="px-4 md:px-12 py-4 flex items-center justify-between max-w-7xl mx-auto">
+          <Logo />
+          <div className="flex items-center gap-6 md:gap-8 text-sm font-medium text-gray-300">
+            <span 
+              className="hover:text-white cursor-pointer transition-colors" 
+              onClick={() => navigate('/')}
+            >
+              HOME
+            </span>
+            <span 
+              className="hover:text-white cursor-pointer transition-colors" 
+              onClick={() => navigate('/movies')}
+            >
+              MOVIES
+            </span>
+            <span 
+              className="hover:text-white cursor-pointer transition-colors" 
+              onClick={() => navigate('/series')}
+            >
+              SERIES
+            </span>
+            <span 
+              className="hover:text-white cursor-pointer transition-colors" 
+              onClick={() => navigate('/sports')}
+            >
+              SPORTS
+            </span>
+          </div>
+        </div>
+      </div>
+
       {/* Hero Carousel - Axis TV Style */}
       {currentHero && (
-        <div className="relative h-[58vh] md:h-[52vh] overflow-hidden">
+        <div className="relative h-[58vh] md:h-[52vh] overflow-hidden pt-16">
           <div 
             className="absolute inset-0 bg-cover bg-center transition-all duration-700"
             style={{ 
@@ -88,6 +123,7 @@ export function Home() {
             </div>
           </div>
 
+          {/* Carousel Dots */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
             {trending.slice(0, 5).map((_, idx) => (
               <button
@@ -102,19 +138,6 @@ export function Home() {
           </div>
         </div>
       )}
-
-      {/* Top Navigation */}
-      <div className="px-4 md:px-12 pt-6 pb-4 border-b border-white/10">
-        <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold text-red-600">VioletFlix</div>
-          <div className="flex gap-8 text-sm font-medium text-gray-300">
-            <span className="text-red-600 font-bold border-b-2 border-red-600 pb-1 cursor-pointer" onClick={() => navigate('/')}>HOME</span>
-            <span className="hover:text-white cursor-pointer" onClick={() => navigate('/movies')}>MOVIES</span>
-            <span className="hover:text-white cursor-pointer" onClick={() => navigate('/series')}>SERIES</span>
-            <span className="hover:text-white cursor-pointer" onClick={() => navigate('/sports')}>SPORTS</span>
-          </div>
-        </div>
-      </div>
 
       {/* Main Content */}
       <div className="px-4 md:px-12 relative z-10 -mt-8 space-y-12">
@@ -179,4 +202,4 @@ export function Home() {
       </div>
     </div>
   );
-        }
+    }
