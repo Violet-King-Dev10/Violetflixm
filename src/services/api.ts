@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ApiResponse, Subject } from '../types';
 
 const MOVIE_API_BASE_URL = 'https://movieapi.xcasper.space/api';
-const VIP_API_BASE_URL = 'https://api.onspace.ai/api';        // ← Added back as requested
+const VIP_API_BASE_URL = 'https://api.onspace.ai/api';
 const SPORT_API_BASE_URL = 'https://omegatech-api.dixonomega.tech/api';
 
 // ====================== MOVIE SERVICES ======================
