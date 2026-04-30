@@ -1,33 +1,33 @@
-import { Subject } from '../types';
 import { useNavigate } from 'react-router-dom';
-import { Play, Plus, ThumbsUp, ChevronDown } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Subject } from '../types';
 
 interface MovieCardProps {
   movie: Subject;
-  key?: string | number;
 }
 
 export function MovieCard({ movie }: MovieCardProps) {
   const navigate = useNavigate();
 
   return (
-    <motion.div
-      whileHover={{ scale: 1.05, zIndex: 50 }}
-      className="relative min-w-[160px] md:min-w-[240px] h-28 md:h-36 cursor-pointer rounded-sm overflow-hidden snap-start"
+    <div 
       onClick={() => navigate(`/movie/${movie.subjectId}`)}
+      className="group cursor-pointer"
     >
-      <img
-        src={movie.cover.url}
-        alt={movie.title}
-        className="w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-black/20 hover:bg-black/0 transition-colors" />
-      
-      {/* Title overlay for small cards */}
-      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/80 to-transparent">
-        <p className="text-xs md:text-sm font-semibold truncate">{movie.title}</p>
+      <div className="relative aspect-[2/3] rounded-xl overflow-hidden border border-white/10 hover:border-red-600 transition-all duration-300">
+        <img 
+          src={movie.cover.url} 
+          alt={movie.title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+        
+        <div className="absolute bottom-0 left-0 right-0 p-4">
+          <p className="font-bold text-sm line-clamp-2">{movie.title}</p>
+          <p className="text-xs text-gray-400 mt-1">
+            {movie.releaseDate?.split('-')[0] || '2025'}
+          </p>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
-}
+      }
