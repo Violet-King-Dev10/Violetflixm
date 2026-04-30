@@ -7,7 +7,7 @@ const SOCIAL_LINKS = [
   { name: 'GitHub', icon: Github, url: 'https://github.com/Violet-King-Dev10', color: 'text-white' },
   { name: 'LinkedIn', icon: Linkedin, url: '#', color: 'text-blue-600' },
   { name: 'Twitter', icon: Twitter, url: '#', color: 'text-sky-400' },
-  { name: 'Contact', icon: Mail, url: `obij77708@gmail.com', color: 'text-red-500' },
+  { name: 'Contact', icon: Mail, url: 'mailto:obij77708@gmail.com', color: 'text-red-500' }, // Fixed email link
 ];
 
 export function About() {
@@ -28,9 +28,9 @@ export function About() {
             The Creator
           </h2>
           <div className="bg-[#1a1a1a] p-8 rounded-2xl border border-white/5 space-y-4">
-            <h3 className="text-xl font-bold">Neaterry6s</h3>
+            <h3 className="text-xl font-bold">VioletKingDev</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Neaterry6s is a visionary full-stack developer dedicated to crafting immersive web experiences. 
+              VioletKingDev is a visionary full-stack developer dedicated to crafting immersive web experiences. 
               With a background in building scalable applications and integrating artificial intelligence, 
               he pushes the boundaries of what's possible on the web.
             </p>
@@ -70,6 +70,4 @@ export function About() {
       </div>
     </div>
   );
-}
-
-// End of file
+   }
