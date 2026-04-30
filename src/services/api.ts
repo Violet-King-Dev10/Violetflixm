@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ApiResponse, Subject } from '../types';
 
 const MOVIE_API_BASE_URL = 'https://movieapi.xcasper.space/api';
-const VIP_API_BASE_URL = 'https://api.onspace.ai/api';
+const VIP_API_BASE_URL = 'https://api.onspace.ai/api';        // ← Added back as requested
 const SPORT_API_BASE_URL = 'https://omegatech-api.dixonomega.tech/api';
 
 // ====================== MOVIE SERVICES ======================
@@ -20,7 +20,7 @@ const extractSubjectList = (payload: any): Subject[] => {
   return [];
 };
 
-const getFromMovieApi = async <T>(path: string, params?: Record<string, string | number | undefined>) => {
+const getFromMovieApi = async <T>(path: string, params?: Record<string, any>) => {
   try {
     return await axios.get<T>(`\( {MOVIE_API_BASE_URL} \){path}`, { params });
   } catch {
@@ -78,7 +78,7 @@ export const movieService = {
 
 // ====================== SPORTS SERVICES ======================
 export const sportsService = {
-  getScores: async (limit = 10) => {
+  getScores: async (limit = 5) => {
     try {
       const res = await axios.get(`\( {SPORT_API_BASE_URL}/tools/scores?limit= \){limit}`);
       return res.data?.matches || res.data?.data || res.data || [];
@@ -103,7 +103,7 @@ export const sportsService = {
       const res = await axios.get(`\( {SPORT_API_BASE_URL}/Sport/match-detail?id= \){id}`);
       return res.data;
     } catch (err) {
-      console.error('Match detail API error:', err);
+      console.error(`Match detail API error for id=${id}:`, err);
       return null;
     }
   },
