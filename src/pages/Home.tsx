@@ -43,7 +43,6 @@ export function Home() {
   }, [trending]);
 
   const currentHero = trending.length > 0 ? trending[currentHeroIndex] : null;
-
   const goToHero = (index: number) => setCurrentHeroIndex(index);
 
   if (loading) {
@@ -56,11 +55,16 @@ export function Home() {
 
   return (
     <div className="relative min-h-screen bg-[#141414] pb-20">
-      {/* Fixed Top Navigation */}
+      {/* Fixed Top Navigation - Logo on top, links below */}
       <div className="fixed top-0 left-0 right-0 bg-[#141414]/95 backdrop-blur-md z-50 border-b border-white/10">
-        <div className="px-4 md:px-12 py-4 flex items-center justify-between max-w-7xl mx-auto">
-          <Logo />
-          <div className="flex items-center gap-6 md:gap-8 text-sm font-medium text-gray-300">
+        <div className="px-4 md:px-12 py-4 max-w-7xl mx-auto">
+          {/* Logo */}
+          <div className="flex justify-center mb-4">
+            <Logo />
+          </div>
+
+          {/* Navigation Links - Below Logo */}
+          <div className="flex items-center justify-center gap-6 md:gap-8 text-sm font-medium text-gray-300">
             <span 
               className="hover:text-white cursor-pointer transition-colors" 
               onClick={() => navigate('/')}
@@ -91,7 +95,7 @@ export function Home() {
 
       {/* Hero Carousel - Axis TV Style */}
       {currentHero && (
-        <div className="relative h-[58vh] md:h-[52vh] overflow-hidden pt-16">
+        <div className="relative h-[58vh] md:h-[52vh] overflow-hidden pt-24">
           <div 
             className="absolute inset-0 bg-cover bg-center transition-all duration-700"
             style={{ 
@@ -123,7 +127,6 @@ export function Home() {
             </div>
           </div>
 
-          {/* Carousel Dots */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
             {trending.slice(0, 5).map((_, idx) => (
               <button
@@ -202,4 +205,4 @@ export function Home() {
       </div>
     </div>
   );
-    }
+}
