@@ -106,7 +106,7 @@ export function Home() {
       {/* Top Navigation */}
       <div className="px-4 md:px-12 pt-6 pb-4 border-b border-white/10">
         <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold text-red-600">VIOLETFlix</div>
+          <div className="text-2xl font-bold text-red-600">VioletFlix</div>
           <div className="flex gap-8 text-sm font-medium text-gray-300">
             <span className="text-red-600 font-bold border-b-2 border-red-600 pb-1 cursor-pointer" onClick={() => navigate('/')}>HOME</span>
             <span className="hover:text-white cursor-pointer" onClick={() => navigate('/movies')}>MOVIES</span>
@@ -179,4 +179,4 @@ export function Home() {
       </div>
     </div>
   );
-}
+        }
